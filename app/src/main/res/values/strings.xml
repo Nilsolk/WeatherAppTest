@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherAppTest</string>
+    <string name="add_location">add_location</string>
+    <string name="weathericon">weatherIcon</string>
 </resources>

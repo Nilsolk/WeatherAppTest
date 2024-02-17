@@ -18,9 +18,9 @@
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:fontFamily="serif-monospace"
         android:textColor="@color/white"
-        android:textSize="26sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@color/white"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location">
 
@@ -68,11 +68,12 @@
 
             <TextView
                 android:id="@+id/textView"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:textColor="@color/black"
-                android:textSize="80sp"
+                android:textSize="90sp"
                 app:layout_constraintBottom_toTopOf="@id/thermometer_loss"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/weather_image"
@@ -186,7 +187,7 @@
                 app:layout_constraintEnd_toEndOf="@id/humidity"
                 app:layout_constraintStart_toStartOf="@id/humidity"
                 app:layout_constraintTop_toBottomOf="@id/humidity"
-                tools:text="20°" />
+                tools:text="30 %" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -194,10 +195,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        tools:itemCount="2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_today"
-        tools:listitem="" />
+        app:layout_constraintTop_toBottomOf="@+id/card_today"
+        tools:listitem="@layout/day_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

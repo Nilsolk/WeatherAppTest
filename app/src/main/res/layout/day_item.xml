@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,10 +27,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:contentDescription=""
+            android:importantForAccessibility="no"
             android:minWidth="32dp"
             android:minHeight="32dp"
             tools:src="@drawable/sunny" />
+
+        <android.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
 
         <TextView
@@ -45,15 +49,16 @@
 
         <android.widget.Space
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="8dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/black"
+            android:textSize="16sp"
             tools:text="25 / 20" />
     </LinearLayout>
 

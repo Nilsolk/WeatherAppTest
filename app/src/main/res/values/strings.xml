@@ -2,4 +2,12 @@
     <string name="app_name">WeatherAppTest</string>
     <string name="add_location">add_location</string>
     <string name="weathericon">weatherIcon</string>
+    <string name="wind_speed">wind speed</string>
+    <string name="humidity_percentage">humidity percentage</string>
+    <string name="max_temperature">max temperature</string>
+    <string name="avg_temperature">avg temperature</string>
+    <string name="min_temperature">min_temperature</string>
+    <string name="back_arrow">back arrow</string>
+    <string name="enter_your_location">Enter your location</string>
+    <string name="history">History</string>
 </resources>

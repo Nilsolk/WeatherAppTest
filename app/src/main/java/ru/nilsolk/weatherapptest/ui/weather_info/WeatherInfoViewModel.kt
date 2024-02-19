@@ -2,6 +2,6 @@ package ru.nilsolk.weatherapptest.ui.weather_info
 
 import androidx.lifecycle.ViewModel
 
-class WeatherInfoViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class WeatherInfoViewModel : ViewModel(){
+
 }

@@ -8,14 +8,15 @@
     app:cardCornerRadius="8dp">
 
     <LinearLayout
-        android:background="@color/blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:background="@color/blue"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -23,6 +24,7 @@
             tools:text="1:00" />
 
         <ImageView
+            android:id="@+id/hour_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -31,6 +33,7 @@
             tools:src="@drawable/sunny" />
 
         <TextView
+            android:id="@+id/hour_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"

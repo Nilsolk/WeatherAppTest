@@ -20,46 +20,22 @@
             android:padding="8dp">
 
             <TextView
+                android:id="@+id/city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="24sp"
                 tools:text="Malang" />
 
             <TextView
+                android:id="@+id/country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="25°" />
+                android:gravity="center"
+                tools:text="Country" />
 
         </LinearLayout>
 
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minWidth="32dp"
-                android:minHeight="32dp"
-                android:src="@drawable/sunny"
-                android:contentDescription="TODO" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tools:text="Sunny" />
-
-        </LinearLayout>
 
     </LinearLayout>
 

@@ -7,6 +7,10 @@ android {
     namespace = "ru.nilsolk.weatherapptest"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "ru.nilsolk.weatherapptest"
         minSdk = 23

@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@color/white"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location">
@@ -44,12 +44,12 @@
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Today"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Today" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/weather_image"
@@ -58,12 +58,12 @@
                 android:layout_margin="12dp"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/weathericon"
+                android:src="@drawable/test_image"
                 app:layout_constraintBottom_toTopOf="@id/thermometer_gain"
                 app:layout_constraintHeight_max="160dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/day"
-                app:layout_constraintWidth_max="160dp"
-                tools:src="@drawable/test_image" />
+                app:layout_constraintWidth_max="160dp" />
 
             <TextView
                 android:id="@+id/textView"
@@ -71,13 +71,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:text="24°"
                 android:textColor="@color/black"
                 android:textSize="90sp"
                 app:layout_constraintBottom_toTopOf="@id/thermometer_loss"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/weather_image"
-                app:layout_constraintTop_toTopOf="@id/day"
-                tools:text="24°" />
+                app:layout_constraintTop_toTopOf="@id/day" />
 
             <ImageView
                 android:id="@+id/thermometer_gain"
@@ -86,12 +86,12 @@
                 android:layout_margin="8dp"
                 android:layout_marginStart="20dp"
                 android:contentDescription="@string/max_temperature"
+                android:src="@drawable/thermometer_gain"
                 app:layout_constraintEnd_toStartOf="@id/thermometer_loss"
                 app:layout_constraintHeight_min="70dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weather_image"
-                app:layout_constraintWidth_min="70dp"
-                tools:src="@drawable/thermometer_gain" />
+                app:layout_constraintWidth_min="70dp" />
 
             <ImageView
                 android:id="@+id/thermometer_loss"
@@ -102,10 +102,10 @@
                 android:contentDescription="@string/min_temperature"
                 android:minWidth="70dp"
                 android:minHeight="70dp"
+                android:src="@drawable/thermometer_loss"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/thermometer_gain"
-                app:layout_constraintTop_toBottomOf="@+id/weather_image"
-                tools:src="@drawable/thermometer_loss" />
+                app:layout_constraintTop_toBottomOf="@+id/weather_image" />
 
             <TextView
                 android:id="@+id/thermometer_gain_text"
@@ -113,12 +113,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="12dp"
+                android:text="24°"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@id/thermometer_gain"
                 app:layout_constraintStart_toStartOf="@id/thermometer_gain"
-                app:layout_constraintTop_toBottomOf="@id/thermometer_gain"
-                tools:text="24°" />
+                app:layout_constraintTop_toBottomOf="@id/thermometer_gain" />
 
             <TextView
                 android:id="@+id/thermometer_loss_text"
@@ -126,12 +126,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="12dp"
+                android:text="20°"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@id/thermometer_loss"
                 app:layout_constraintStart_toStartOf="@id/thermometer_loss"
-                app:layout_constraintTop_toBottomOf="@id/thermometer_loss"
-                tools:text="20°" />
+                app:layout_constraintTop_toBottomOf="@id/thermometer_loss" />
 
             <ImageView
                 android:id="@+id/air"
@@ -140,12 +140,12 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
                 android:contentDescription="@string/wind_speed"
+                android:src="@drawable/air"
                 app:layout_constraintEnd_toEndOf="@id/thermometer_gain"
                 app:layout_constraintHeight_min="70dp"
                 app:layout_constraintStart_toStartOf="@id/thermometer_gain"
                 app:layout_constraintTop_toBottomOf="@id/thermometer_gain_text"
-                app:layout_constraintWidth_min="70dp"
-                tools:src="@drawable/air" />
+                app:layout_constraintWidth_min="70dp" />
 
             <ImageView
                 android:id="@+id/humidity"
@@ -154,12 +154,12 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
                 android:contentDescription="@string/humidity_percentage"
+                android:src="@drawable/humidity_mid"
                 app:layout_constraintEnd_toEndOf="@id/thermometer_loss"
                 app:layout_constraintHeight_min="70dp"
                 app:layout_constraintStart_toStartOf="@id/thermometer_loss"
                 app:layout_constraintTop_toBottomOf="@id/thermometer_loss_text"
-                app:layout_constraintWidth_min="70dp"
-                tools:src="@drawable/humidity_mid" />
+                app:layout_constraintWidth_min="70dp" />
 
 
             <TextView
@@ -168,14 +168,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:textColor="@color/black"
+                android:text="2.4 km/h"
 
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/air"
                 app:layout_constraintStart_toStartOf="@id/air"
-                app:layout_constraintTop_toBottomOf="@id/air"
-                tools:text="2.4 km/h" />
+                app:layout_constraintTop_toBottomOf="@id/air" />
 
             <TextView
                 android:id="@+id/humidity_text"
@@ -184,13 +184,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
+                android:text="30 %"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/humidity"
                 app:layout_constraintStart_toStartOf="@id/humidity"
-                app:layout_constraintTop_toBottomOf="@id/humidity"
-                tools:text="30 %" />
+                app:layout_constraintTop_toBottomOf="@id/humidity" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -200,12 +200,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_today"
-        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="2"
-        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/day_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

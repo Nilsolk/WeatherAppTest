@@ -9,11 +9,11 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        weatherDatabase = Room.databaseBuilder(
-            this,
-            WeatherDatabase::class.java,
-            "weather_database"
-        ).build()
+//        weatherDatabase = Room.databaseBuilder(
+//            this,
+//            WeatherDatabase::class.java,
+//            "weather_database"
+//        ).build()
     }
 
 }

@@ -5,10 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import ru.nilsolk.weatherapptest.R
 import ru.nilsolk.weatherapptest.databinding.FragmentMainWeatherBinding
+import ru.nilsolk.weatherapptest.ui.location.LocationViewModel
 
-class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
+class MainWeatherFragment : Fragment(),
+    OnItemClickListener<MainItem> {
 
+    private lateinit var viewModel: MainWeatherViewModel
     private lateinit var binding: FragmentMainWeatherBinding
     private lateinit var mainAdapter: MainAdapter
 
@@ -24,13 +32,29 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainAdapter = MainAdapter(mutableListOf())
+        mainAdapter = MainAdapter(
+            mutableListOf(
+                MainItem(
+                    "String",
+                    R.drawable.test_image,
+                    "28",
+                    "16/17"
+                ),
+                MainItem(
+                    "Stringgg",
+                    R.drawable.test_image,
+                    "25",
+                    "11/12"
+                )
+            )
+        )
         mainAdapter.setOnItemClickListener(this)
         binding.mainRecyclerView.adapter = mainAdapter
+        binding.mainRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onItemClick(item: MainItem) {
-
+        findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
     }
 
 

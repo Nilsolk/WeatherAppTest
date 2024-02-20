@@ -1,7 +1,13 @@
 package ru.nilsolk.weatherapptest.data_source.cloud_data_source
 
 sealed class BaseResponse<out T> {
-    class Success<T>(value: T) : BaseResponse<T>()
-    class Error(error: String) : BaseResponse<Nothing>()
+    class Success<T>(private val value: T) : BaseResponse<T>() {
+        fun getData() = value
+    }
+
+    class Error(private val error: String) : BaseResponse<Nothing>() {
+        fun getError() = error
+    }
+
     data object Loading : BaseResponse<Nothing>()
 }

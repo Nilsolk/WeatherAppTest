@@ -1,17 +1,14 @@
 package ru.nilsolk.weatherapptest.ui.main_weather
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavController
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import ru.nilsolk.weatherapptest.R
 import ru.nilsolk.weatherapptest.databinding.FragmentMainWeatherBinding
-import ru.nilsolk.weatherapptest.ui.location.LocationViewModel
 
 class MainWeatherFragment : Fragment(),
     OnItemClickListener<MainItem> {
@@ -54,8 +51,7 @@ class MainWeatherFragment : Fragment(),
     }
 
     override fun onItemClick(item: MainItem) {
-        findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+        findNavController().navigate(R.id.action_mainFragment_to_infoFragment)
     }
-
 
 }

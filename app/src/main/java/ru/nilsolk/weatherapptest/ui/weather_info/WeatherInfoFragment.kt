@@ -31,11 +31,7 @@ class WeatherInfoFragment : Fragment() {
         infoAdapter = InfoAdapter(infoItems)
         binding.recyclerViewHourly.adapter = infoAdapter
 
+
     }
-
-
-
-
-
 
 }

@@ -12,12 +12,15 @@
         tools:layout="@layout/fragment_main_weather">
         <action
             android:id="@+id/action_mainFragment_to_infoFragment"
-            app:destination="@id/secondFragment" />
+            app:destination="@id/weatherInfoFragment" />
+        <action
+            android:id="@+id/to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="ru.nilsolk.weatherapptest.ui.weather_info.W"
+        android:id="@+id/weatherInfoFragment"
+        android:name="ru.nilsolk.weatherapptest.ui.weather_info.WeatherInfoFragment"
         android:label="fragment_information"
         tools:layout="@layout/fragment_weather_info">
         <action
@@ -34,5 +37,8 @@
         <action
             android:id="@+id/action_locationFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/to_locationFragment"
+            app:destination="@id/locationFragment" />
     </fragment>
 </navigation>

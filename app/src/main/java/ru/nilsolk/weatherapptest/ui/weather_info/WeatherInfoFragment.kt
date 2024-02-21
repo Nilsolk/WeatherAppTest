@@ -1,15 +1,18 @@
+package ru.nilsolk.weatherapptest.ui.weather_info
+
+import WeatherInfoViewModel
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nilsolk.weatherapptest.ImageLoader
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.Forecastday
 import ru.nilsolk.weatherapptest.databinding.FragmentWeatherInfoBinding
-import ru.nilsolk.weatherapptest.ui.weather_info.InfoAdapter
-import ru.nilsolk.weatherapptest.ui.weather_info.InfoItem
 
 class WeatherInfoFragment : Fragment() {
 
@@ -25,10 +28,12 @@ class WeatherInfoFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[WeatherInfoViewModel::class.java]
-        viewModel.setForecast(arguments?.getSerializable("weather_day") as Forecastday)
+        arguments?.getParcelable("weather_day", Forecastday::class.java)
+            ?.let { viewModel.setForecast(it) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

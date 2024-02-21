@@ -1,5 +1,6 @@
 package ru.nilsolk.weatherapptest.ui.main_weather
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +27,6 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
     private lateinit var viewModel: MainWeatherViewModel
     private lateinit var binding: FragmentMainWeatherBinding
     private lateinit var mainAdapter: MainAdapter
-    private lateinit var location: String
     private lateinit var imageLoader: ImageLoader
     private lateinit var forecast: DailyForecastModel
     override fun onCreateView(
@@ -37,10 +37,6 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        location = arguments?.getString("location")!!
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,11 +52,16 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+        val location = arguments?.getString("location")
         observeViewModel()
-        viewModel.getDailyForecast(location, 2)
+
+        if (location != null) {
+            viewModel.getDailyForecast(location, 2)
+        }
         binding.cardToday.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable("weather_day", forecast.forecast.forecastDay[0])
+                putParcelable("weather_day", forecast.forecast.forecastDay[0])
             }
             findNavController().navigate(R.id.action_mainFragment_to_infoFragment, bundle)
         }
@@ -116,7 +117,7 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
 
         val bundle = Bundle().apply {
             val index = mainAdapter.getList().indexOf(item)
-            putSerializable("weather_day", forecast.forecast.forecastDay[index])
+            putParcelable("weather_day", forecast.forecast.forecastDay[index])
         }
         findNavController().navigate(R.id.action_mainFragment_to_infoFragment, bundle)
     }

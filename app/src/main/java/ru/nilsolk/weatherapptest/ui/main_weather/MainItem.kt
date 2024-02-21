@@ -4,8 +4,7 @@ import androidx.annotation.DrawableRes
 import java.io.Serializable
 
 data class MainItem(
-    val weekday: String,
-    @DrawableRes val weatherImage: Int,
+    val weatherImage: String,
     val weatherNow: String,
     val minMaxTemp: String
-) : Serializable
+)

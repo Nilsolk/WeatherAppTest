@@ -3,12 +3,15 @@ package ru.nilsolk.weatherapptest.ui.weather_info
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.nilsolk.weatherapptest.ImageLoader
 import ru.nilsolk.weatherapptest.databinding.HourlyItemBinding
+import ru.nilsolk.weatherapptest.ui.main_weather.MainItem
 
 class InfoAdapter(
-    private val data: List<InfoItem>
+    private val imageLoader: ImageLoader
 ) :
     RecyclerView.Adapter<InfoAdapter.InfoViewHolder>() {
+    private var data: List<InfoItem> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = HourlyItemBinding.inflate(inflater, parent, false)
@@ -21,6 +24,11 @@ class InfoAdapter(
 
     }
 
+    fun updateList(newData: List<InfoItem>) {
+        data = newData
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return data.size
     }
@@ -31,7 +39,7 @@ class InfoAdapter(
         fun bind(infoItem: InfoItem) {
             binding.apply {
                 hour.text = infoItem.time
-                hourImage.setImageResource(infoItem.image)
+                imageLoader.loadImage(infoItem.image, hourImage)
                 hourTemperature.text = infoItem.temperature
             }
         }

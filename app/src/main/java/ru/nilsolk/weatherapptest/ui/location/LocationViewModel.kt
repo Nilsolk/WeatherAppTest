@@ -1,5 +1,6 @@
 package ru.nilsolk.weatherapptest.ui.location
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,9 +19,13 @@ class LocationViewModel(private val repository: WeatherRepository) : ViewModel()
 
     fun searchLocation(query: String) {
         viewModelScope.launch {
-            _locations.value = BaseResponse.Loading
-            val response = repository.searchLocation(query)
-            _locations.value = response
+            try {
+                val response = repository.searchLocation(query)
+                _locations.value = response
+            } catch (e: Exception) {
+                _locations.value = null
+                Log.e("LocationViewModel", "Error searching location: ${e.message}", e)
+            }
         }
     }
 }

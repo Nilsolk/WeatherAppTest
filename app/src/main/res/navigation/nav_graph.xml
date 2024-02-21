@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="ru.nilsolk.weatherapptest.ui.weather_info.WeatherInfoFragment"
+        android:name="ru.nilsolk.weatherapptest.ui.weather_info.W"
         android:label="fragment_information"
         tools:layout="@layout/fragment_weather_info">
         <action

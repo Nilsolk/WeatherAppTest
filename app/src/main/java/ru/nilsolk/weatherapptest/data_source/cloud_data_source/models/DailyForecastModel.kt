@@ -1,6 +1,7 @@
 package ru.nilsolk.weatherapptest.data_source.cloud_data_source.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class DailyForecastModel(
@@ -70,4 +71,4 @@ data class Forecastday(
     @SerializedName("day") val day: Day,
     @SerializedName("hour") val hour: List<Hour>
 
-)
+) : Serializable

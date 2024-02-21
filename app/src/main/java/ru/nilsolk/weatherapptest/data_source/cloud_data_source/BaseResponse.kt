@@ -9,5 +9,4 @@ sealed class BaseResponse<out T> {
         fun getError() = error
     }
 
-    data object Loading : BaseResponse<Nothing>()
 }

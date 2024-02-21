@@ -10,11 +10,11 @@ import ru.nilsolk.weatherapptest.ui.main_weather.MainItem
 import ru.nilsolk.weatherapptest.ui.main_weather.OnItemClickListener
 
 class LocationAdapter(
-    private var data: List<LocationItem>,
     private var itemClickListener: OnItemClickListener<LocationItem>? = null
 ) :
     RecyclerView.Adapter<LocationAdapter.SearchViewHolder>() {
 
+    private var data: List<LocationItem> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val binding =
             LocationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,6 +24,7 @@ class LocationAdapter(
     fun setOnItemClickListener(listener: OnItemClickListener<LocationItem>) {
         itemClickListener = listener
     }
+
     fun updateList(newData: List<LocationItem>) {
         data = newData
         notifyDataSetChanged()

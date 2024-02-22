@@ -28,10 +28,31 @@
         tools:text="Malang" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/enter_to_plus_button_for_add_your_location"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/card_today"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -202,6 +223,7 @@
         android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
 
         app:layout_constraintTop_toBottomOf="@+id/card_today"
         tools:itemCount="2"

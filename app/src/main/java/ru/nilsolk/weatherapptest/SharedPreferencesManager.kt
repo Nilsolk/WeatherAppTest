@@ -1,36 +1,18 @@
 package ru.nilsolk.weatherapptest
 
 import android.content.Context
-import android.content.SharedPreferences
 
 object SharedPreferencesManager {
-    private const val PREF_NAME = "WeatherAppPrefs"
-    private const val KEY_SELECTED_LOCATION = "selected_location"
+    private const val PREF_NAME = "fragment_preferences"
+    private const val KEY_FIRST_RUN = "first_run"
 
-
-    private fun getSharedPreferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    fun isFirstRun(context: Context, fragmentTag: String): Boolean {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("${KEY_FIRST_RUN}_$fragmentTag", true)
     }
 
-
-    fun saveSelectedLocation(context: Context, location: String) {
-        val editor = getSharedPreferences(context).edit()
-        editor.putString(KEY_SELECTED_LOCATION, location)
-        editor.apply()
-    }
-
-    fun getSelectedLocation(context: Context): String? {
-        return getSharedPreferences(context).getString(KEY_SELECTED_LOCATION, null)
-    }
-
-
-    fun isLocationSelected(context: Context): Boolean {
-        return getSharedPreferences(context).contains(KEY_SELECTED_LOCATION)
-    }
-
-    fun clearSelectedLocation(context: Context) {
-        val editor = getSharedPreferences(context).edit()
-        editor.remove(KEY_SELECTED_LOCATION)
-        editor.apply()
+    fun setFirstRun(context: Context, fragmentTag: String, isFirstRun: Boolean) {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("${KEY_FIRST_RUN}_$fragmentTag", isFirstRun).apply()
     }
 }

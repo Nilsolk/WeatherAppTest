@@ -14,6 +14,7 @@ import ru.nilsolk.weatherapptest.App
 import ru.nilsolk.weatherapptest.ImageLoader
 import ru.nilsolk.weatherapptest.Navigation
 import ru.nilsolk.weatherapptest.R
+import ru.nilsolk.weatherapptest.SharedPreferencesManager
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.DailyForecastModel
 import ru.nilsolk.weatherapptest.databinding.FragmentMainWeatherBinding
@@ -36,8 +37,17 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val isFirstRun = SharedPreferencesManager.isFirstRun(requireContext(), TAG)
+        if (isFirstRun) {
+            SharedPreferencesManager.setFirstRun(requireContext(), TAG, false)
+        } else {
+            binding.mainRecyclerView.visibility = View.VISIBLE
+            binding.cardTemp.visibility = View.GONE
+            binding.cardToday.visibility = View.VISIBLE
+        }
+
         super.onViewCreated(view, savedInstanceState)
         val application = requireActivity().application as App
         val repository = application.provideWeatherRepository()
@@ -122,6 +132,10 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             R.id.action_mainFragment_to_infoFragment,
             "weather_day"
         )
+    }
+
+    companion object {
+        private const val TAG = "fragment_tag"
     }
 }
 

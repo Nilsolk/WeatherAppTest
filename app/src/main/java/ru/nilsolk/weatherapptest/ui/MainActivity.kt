@@ -1,12 +1,11 @@
 package ru.nilsolk.weatherapptest.ui
 
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import ru.nilsolk.weatherapptest.R
+import ru.nilsolk.weatherapptest.SharedPreferencesManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,3 +15,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
+

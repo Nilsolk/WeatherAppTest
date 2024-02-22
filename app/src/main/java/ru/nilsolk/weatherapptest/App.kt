@@ -1,9 +1,6 @@
 package ru.nilsolk.weatherapptest
 
 import android.app.Application
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -24,9 +21,8 @@ class App : Application() {
     }
 
     override fun onCreate() {
+        SharedPreferencesManager.destroy(this)
         super.onCreate()
-
-
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(Interceptor { chain ->
             val original: Request = chain.request()
@@ -51,5 +47,6 @@ class App : Application() {
         val networkRequest = NetworkRequest()
         return WeatherRepositoryImpl(retrofit, networkRequest)
     }
+
 
 }

@@ -15,4 +15,9 @@ object SharedPreferencesManager {
         val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         sharedPreferences.edit().putBoolean("${KEY_FIRST_RUN}_$fragmentTag", isFirstRun).apply()
     }
+
+    fun destroy(context: Context) {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+    }
 }

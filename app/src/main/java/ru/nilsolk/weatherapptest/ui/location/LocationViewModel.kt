@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.WeatherRepository
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.LocationModel
-import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.WeatherRepositoryImpl
+
 
 class LocationViewModel(private val repository: WeatherRepository) : ViewModel() {
 

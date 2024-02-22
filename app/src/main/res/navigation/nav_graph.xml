@@ -16,6 +16,10 @@
         <action
             android:id="@+id/to_mainFragment"
             app:destination="@id/mainFragment" />
+
+        <action
+            android:id="@+id/from_mainFragment_to_locationFragmrnt"
+            app:destination="@+id/locationFragment" />
     </fragment>
 
     <fragment

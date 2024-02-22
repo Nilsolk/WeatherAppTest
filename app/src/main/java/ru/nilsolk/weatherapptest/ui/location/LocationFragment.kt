@@ -1,6 +1,5 @@
 package ru.nilsolk.weatherapptest.ui.location
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,10 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.nilsolk.weatherapptest.App
+import ru.nilsolk.weatherapptest.Navigation
 import ru.nilsolk.weatherapptest.R
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
 import ru.nilsolk.weatherapptest.databinding.FragmentLocationBinding
@@ -26,6 +29,8 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
     private lateinit var viewModel: LocationViewModel
     private lateinit var binding: FragmentLocationBinding
     private lateinit var locationAdapter: LocationAdapter
+    private lateinit var navigation: Navigation
+    private var searchJob: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +54,12 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
             adapter = locationAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        navigation = Navigation(this)
+        observeViewModel()
+
+        binding.backArrowLocations.setOnClickListener {
+            navigation.backNavigate()
+        }
         binding.editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -60,15 +71,17 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
                 } else {
                     p0?.let {
                         val location = it.toString()
-                        viewModel.searchLocation(location)
-                        observeViewModel()
+                        searchJob?.cancel()
+                        searchJob = lifecycleScope.launch {
+                            delay(500)
+                            viewModel.searchLocation(location)
+                        }
                     }
                 }
-            }
 
+            }
         })
     }
-
 
     private fun observeViewModel() {
         lifecycleScope.launch {
@@ -78,15 +91,18 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
                     is BaseResponse.Success -> {
                         val locations = response.getData()
                         if (locations.isEmpty()) {
+
                             Toast.makeText(
                                 requireContext(),
                                 "There is no such city",
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_SHORT
                             ).show()
                         } else {
-                            locationAdapter.updateList(locations.map { location ->
-                                LocationItem(location.name, location.country)
-                            })
+                            withContext(Dispatchers.Main) {
+                                locationAdapter.updateList(locations.map { location ->
+                                    LocationItem(location.name, location.country)
+                                })
+                            }
                         }
                     }
 
@@ -106,10 +122,11 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
     }
 
     override fun onItemClick(item: LocationItem) {
-        val bundle = Bundle().apply {
-            putString("location", "${item.city} ${item.country}")
-        }
-        findNavController().navigate(R.id.action_locationFragment_to_mainFragment, bundle)
+        navigation.navigateWithData(
+            "${item.city} ${item.country}",
+            R.id.action_locationFragment_to_mainFragment,
+            "location"
+        )
     }
 }
 

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.nilsolk.weatherapptest.ImageLoader
+import ru.nilsolk.weatherapptest.Navigation
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.Forecastday
 import ru.nilsolk.weatherapptest.databinding.FragmentWeatherInfoBinding
 
@@ -19,6 +20,7 @@ class WeatherInfoFragment : Fragment() {
     private lateinit var binding: FragmentWeatherInfoBinding
     private lateinit var infoAdapter: InfoAdapter
     private lateinit var viewModel: WeatherInfoViewModel
+    private lateinit var navigation: Navigation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +40,7 @@ class WeatherInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        navigation = Navigation(this)
         val imageLoader = ImageLoader(requireContext())
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewHourly.layoutManager = layoutManager
@@ -53,6 +55,10 @@ class WeatherInfoFragment : Fragment() {
             binding.avgTempText.text = "${forecast.day.avgTempC}°"
             binding.maxTempText.text = "${forecast.day.maxTempC}°"
             binding.minTempText.text = "${forecast.day.minTempC}°"
+
+            binding.backArrowInformation.setOnClickListener {
+                navigation.backNavigate()
+            }
 
             infoAdapter.updateList(forecast.hour.map {
                 InfoItem("${it.tempC}°", it.time.takeLast(5), it.condition.icon)

@@ -83,7 +83,6 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             viewModel.dailyForecast.collect { response ->
                 when (response) {
                     is BaseResponse.Success -> {
-                        binding.mainProgressBar.visibility = View.INVISIBLE
                         forecast = response.getData()
                         imageLoader.loadImage(
                             forecast.current.condition.icon, binding.weatherImage

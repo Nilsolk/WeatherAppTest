@@ -13,4 +13,5 @@
     <string name="enter_your_city">Enter your city</string>
     <string name="list_of_cities">List of cities</string>
     <string name="enter_to_plus_button_for_add_your_location">Enter to plus button to add your location</string>
+    <string name="today">Today</string>
 </resources>

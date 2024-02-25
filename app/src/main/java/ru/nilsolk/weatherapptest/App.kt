@@ -21,7 +21,6 @@ class App : Application() {
     }
 
     override fun onCreate() {
-        SharedPreferencesManager.destroy(this)
         super.onCreate()
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(Interceptor { chain ->

@@ -4,20 +4,15 @@ import android.content.Context
 
 object SharedPreferencesManager {
     private const val PREF_NAME = "fragment_preferences"
-    private const val KEY_FIRST_RUN = "first_run"
+    private const val KEY_CACHED_LOCATION = "cached_location"
 
-    fun isFirstRun(context: Context, fragmentTag: String): Boolean {
+    fun getCachedLocation(context: Context): String? {
         val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("${KEY_FIRST_RUN}_$fragmentTag", true)
+        return sharedPreferences.getString(KEY_CACHED_LOCATION, null)
     }
 
-    fun setFirstRun(context: Context, fragmentTag: String, isFirstRun: Boolean) {
+    fun setCachedLocation(context: Context, location: String) {
         val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        sharedPreferences.edit().putBoolean("${KEY_FIRST_RUN}_$fragmentTag", isFirstRun).apply()
-    }
-
-    fun destroy(context: Context) {
-        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        sharedPreferences.edit().clear().apply()
+        sharedPreferences.edit().putString(KEY_CACHED_LOCATION, location).apply()
     }
 }

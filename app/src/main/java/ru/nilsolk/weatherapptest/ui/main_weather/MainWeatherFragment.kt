@@ -30,24 +30,13 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
     private lateinit var forecast: DailyForecastModel
     private lateinit var navigation: Navigation
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainWeatherBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        val isFirstRun = SharedPreferencesManager.isFirstRun(requireContext(), TAG)
-        if (isFirstRun) {
-            SharedPreferencesManager.setFirstRun(requireContext(), TAG, false)
-        } else {
-            binding.mainRecyclerView.visibility = View.VISIBLE
-            binding.cardTemp.visibility = View.GONE
-            binding.cardToday.visibility = View.VISIBLE
-        }
-
         super.onViewCreated(view, savedInstanceState)
         val application = requireActivity().application as App
         val repository = application.provideWeatherRepository()
@@ -61,12 +50,22 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             adapter = mainAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        val location = arguments?.getString("location")
+
+        val cachedLocation = SharedPreferencesManager.getCachedLocation(requireContext())
+        if (cachedLocation.isNullOrEmpty()) {
+            binding.mainRecyclerView.visibility = View.GONE
+            binding.cardTemp.visibility = View.VISIBLE
+            binding.cardToday.visibility = View.GONE
+        } else {
+            binding.mainRecyclerView.visibility = View.VISIBLE
+            binding.cardTemp.visibility = View.GONE
+            binding.cardToday.visibility = View.VISIBLE
+
+            viewModel.getDailyForecast(cachedLocation, 2)
+        }
+
         observeViewModel()
 
-        if (location != null) {
-            viewModel.getDailyForecast(location, 2)
-        }
         binding.cardToday.setOnClickListener {
             navigation.navigateWithData(
                 forecast.forecast.forecastDay[0],
@@ -84,11 +83,10 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             viewModel.dailyForecast.collect { response ->
                 when (response) {
                     is BaseResponse.Success -> {
+                        binding.mainProgressBar.visibility = View.INVISIBLE
                         forecast = response.getData()
-
                         imageLoader.loadImage(
-                            forecast.current.condition.icon,
-                            binding.weatherImage
+                            forecast.current.condition.icon, binding.weatherImage
                         )
                         binding.airText.text = "${forecast.current.windKph} km/h"
                         binding.humidityText.text = "${forecast.current.humidity} %"
@@ -112,9 +110,7 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
 
                     is BaseResponse.Error -> {
                         Toast.makeText(
-                            requireContext(),
-                            "Error: ${response.getError()}",
-                            Toast.LENGTH_SHORT
+                            requireContext(), "Error: ${response.getError()}", Toast.LENGTH_SHORT
                         ).show()
                     }
 

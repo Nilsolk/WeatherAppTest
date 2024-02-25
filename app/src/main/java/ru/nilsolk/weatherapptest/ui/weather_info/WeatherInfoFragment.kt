@@ -1,12 +1,10 @@
 package ru.nilsolk.weatherapptest.ui.weather_info
 
-import WeatherInfoViewModel
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,12 +28,16 @@ class WeatherInfoFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[WeatherInfoViewModel::class.java]
-        arguments?.getParcelable("weather_day", Forecastday::class.java)
-            ?.let { viewModel.setForecast(it) }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable("weather_day", Forecastday::class.java)
+                ?.let { viewModel.setForecast(it) }
+        } else {
+            arguments?.getParcelable<Forecastday>("weather_day")
+                ?.let { viewModel.setForecast(it) }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

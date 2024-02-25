@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
 import ru.nilsolk.weatherapptest.App
 import ru.nilsolk.weatherapptest.Navigation
 import ru.nilsolk.weatherapptest.R
+import ru.nilsolk.weatherapptest.SharedPreferencesManager
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
 import ru.nilsolk.weatherapptest.databinding.FragmentLocationBinding
 import ru.nilsolk.weatherapptest.ui.ViewModelFactory
@@ -87,11 +88,9 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
         lifecycleScope.launch {
             viewModel.locations.collect { response ->
                 when (response) {
-
                     is BaseResponse.Success -> {
                         val locations = response.getData()
                         if (locations.isEmpty()) {
-
                             Toast.makeText(
                                 requireContext(),
                                 "There is no such city",
@@ -109,7 +108,7 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
                     is BaseResponse.Error -> {
                         Toast.makeText(
                             requireContext(),
-                            "Internet connection error",
+                            "Internet connection or server error",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -122,11 +121,10 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
     }
 
     override fun onItemClick(item: LocationItem) {
-        navigation.navigateWithData(
-            "${item.city} ${item.country}",
+        navigation.navigateTo(
             R.id.action_locationFragment_to_mainFragment,
-            "location"
         )
+        SharedPreferencesManager.setCachedLocation(requireContext(), "${item.city} ${item.country}")
     }
 }
 

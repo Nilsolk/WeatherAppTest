@@ -3,9 +3,8 @@ package ru.nilsolk.weatherapptest.ui.main_weather
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.nilsolk.weatherapptest.ImageLoader
+import ru.nilsolk.weatherapptest.data_source.ImageLoader
 import ru.nilsolk.weatherapptest.databinding.DayItemBinding
-import ru.nilsolk.weatherapptest.ui.location.LocationItem
 
 
 class MainAdapter(

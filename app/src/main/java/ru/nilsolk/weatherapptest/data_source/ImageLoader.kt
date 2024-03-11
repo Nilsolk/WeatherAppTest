@@ -1,4 +1,4 @@
-package ru.nilsolk.weatherapptest
+package ru.nilsolk.weatherapptest.data_source
 
 import android.content.Context
 import android.util.Log

@@ -3,9 +3,8 @@ package ru.nilsolk.weatherapptest.ui.weather_info
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.nilsolk.weatherapptest.ImageLoader
+import ru.nilsolk.weatherapptest.data_source.ImageLoader
 import ru.nilsolk.weatherapptest.databinding.HourlyItemBinding
-import ru.nilsolk.weatherapptest.ui.main_weather.MainItem
 
 class InfoAdapter(
     private val imageLoader: ImageLoader

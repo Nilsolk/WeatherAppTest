@@ -1,9 +1,9 @@
-package ru.nilsolk.weatherapptest.data_source.cloud_data_source.models
+package ru.nilsolk.weatherapptest.data_source.cloud_data_source
 
 
-import ru.nilsolk.weatherapptest.data_source.cloud_data_source.Api
-import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
-import ru.nilsolk.weatherapptest.data_source.cloud_data_source.WeatherRepository
+import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.DailyForecastModel
+import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.LocationModel
+import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.NetworkRequest
 
 class WeatherRepositoryImpl(
     private val api: Api,

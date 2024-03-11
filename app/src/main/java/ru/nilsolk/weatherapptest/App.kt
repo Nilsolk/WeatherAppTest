@@ -10,7 +10,7 @@ import ru.nilsolk.weatherapptest.data_source.cache_data_source.WeatherDatabase
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.Api
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.WeatherRepository
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.NetworkRequest
-import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.WeatherRepositoryImpl
+import ru.nilsolk.weatherapptest.data_source.cloud_data_source.WeatherRepositoryImpl
 
 class App : Application() {
     private lateinit var weatherDatabase: WeatherDatabase

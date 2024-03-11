@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.nilsolk.weatherapptest.ImageLoader
-import ru.nilsolk.weatherapptest.Navigation
+import ru.nilsolk.weatherapptest.data_source.ImageLoader
+import ru.nilsolk.weatherapptest.ui.Navigation
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.Forecastday
 import ru.nilsolk.weatherapptest.databinding.FragmentWeatherInfoBinding
 

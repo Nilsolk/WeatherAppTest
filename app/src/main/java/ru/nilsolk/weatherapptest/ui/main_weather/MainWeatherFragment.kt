@@ -1,6 +1,7 @@
 package ru.nilsolk.weatherapptest.ui.main_weather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import ru.nilsolk.weatherapptest.App
-import ru.nilsolk.weatherapptest.ImageLoader
-import ru.nilsolk.weatherapptest.Navigation
+import ru.nilsolk.weatherapptest.data_source.ImageLoader
+import ru.nilsolk.weatherapptest.ui.Navigation
 import ru.nilsolk.weatherapptest.R
-import ru.nilsolk.weatherapptest.SharedPreferencesManager
+import ru.nilsolk.weatherapptest.data_source.SharedPreferencesManager
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.models.DailyForecastModel
 import ru.nilsolk.weatherapptest.databinding.FragmentMainWeatherBinding
@@ -29,6 +30,7 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
     private lateinit var imageLoader: ImageLoader
     private lateinit var forecast: DailyForecastModel
     private lateinit var navigation: Navigation
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -43,6 +45,7 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
         viewModel =
             ViewModelProvider(this, ViewModelFactory(repository))[MainWeatherViewModel::class.java]
         navigation = Navigation(this)
+        sharedPreferencesManager = SharedPreferencesManager(this)
         imageLoader = ImageLoader(requireContext())
         mainAdapter = MainAdapter(imageLoader)
         mainAdapter.setOnItemClickListener(this)
@@ -51,7 +54,7 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        val cachedLocation = SharedPreferencesManager.getCachedLocation(requireContext())
+        val cachedLocation = sharedPreferencesManager.getCachedLocation()
         if (cachedLocation.isNullOrEmpty()) {
             binding.mainRecyclerView.visibility = View.GONE
             binding.cardTemp.visibility = View.VISIBLE
@@ -83,6 +86,7 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
             viewModel.dailyForecast.collect { response ->
                 when (response) {
                     is BaseResponse.Success -> {
+                        binding.mainProgressBar.visibility = View.INVISIBLE
                         forecast = response.getData()
                         imageLoader.loadImage(
                             forecast.current.condition.icon, binding.weatherImage
@@ -107,7 +111,13 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
                         })
                     }
 
+                    is BaseResponse.Loading -> {
+                        binding.mainProgressBar.visibility = View.VISIBLE
+                    }
+
                     is BaseResponse.Error -> {
+                        Log.e("error", response.getError())
+                        Log.e("error", sharedPreferencesManager.getCachedLocation().toString())
                         Toast.makeText(
                             requireContext(), "Error: ${response.getError()}", Toast.LENGTH_SHORT
                         ).show()
@@ -129,9 +139,6 @@ class MainWeatherFragment : Fragment(), OnItemClickListener<MainItem> {
         )
     }
 
-    companion object {
-        private const val TAG = "fragment_tag"
-    }
 }
 
 

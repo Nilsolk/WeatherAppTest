@@ -9,6 +9,7 @@ class NetworkRequest {
     suspend fun <T> sendRequest(request: suspend () -> Response<T>): BaseResponse<T> =
         withContext(Dispatchers.IO) {
             return@withContext try {
+                BaseResponse.Loading
                 val response = request()
                 if (response.isSuccessful) {
                     BaseResponse.Success(response.body()!!)

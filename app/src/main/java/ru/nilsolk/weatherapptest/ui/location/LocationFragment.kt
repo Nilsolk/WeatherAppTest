@@ -17,16 +17,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.nilsolk.weatherapptest.App
-import ru.nilsolk.weatherapptest.Navigation
 import ru.nilsolk.weatherapptest.R
-import ru.nilsolk.weatherapptest.SharedPreferencesManager
+import ru.nilsolk.weatherapptest.data_source.SharedPreferencesManager
 import ru.nilsolk.weatherapptest.data_source.cloud_data_source.BaseResponse
 import ru.nilsolk.weatherapptest.databinding.FragmentLocationBinding
+import ru.nilsolk.weatherapptest.ui.Navigation
 import ru.nilsolk.weatherapptest.ui.ViewModelFactory
 import ru.nilsolk.weatherapptest.ui.main_weather.OnItemClickListener
 
 class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
 
+    private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private lateinit var viewModel: LocationViewModel
     private lateinit var binding: FragmentLocationBinding
     private lateinit var locationAdapter: LocationAdapter
@@ -49,6 +50,7 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
         viewModel =
             ViewModelProvider(this, ViewModelFactory(repository))[LocationViewModel::class.java]
 
+        sharedPreferencesManager = SharedPreferencesManager(this)
         locationAdapter = LocationAdapter()
         locationAdapter.setOnItemClickListener(this)
         binding.citiesRecycler.apply {
@@ -124,7 +126,7 @@ class LocationFragment : Fragment(), OnItemClickListener<LocationItem> {
         navigation.navigateTo(
             R.id.action_locationFragment_to_mainFragment,
         )
-        SharedPreferencesManager.setCachedLocation(requireContext(), "${item.city} ${item.country}")
+        sharedPreferencesManager.setCachedLocation("${item.city} ${item.country}")
     }
 }
 

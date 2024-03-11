@@ -1,4 +1,4 @@
-package ru.nilsolk.weatherapptest
+package ru.nilsolk.weatherapptest.ui
 
 import android.os.Bundle
 import android.os.Parcelable
